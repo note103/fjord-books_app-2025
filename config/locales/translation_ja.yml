@@ -4,6 +4,7 @@ ja:
       book: 本
       user: ユーザ
       report: 日報
+      comment: コメント
 
     attributes:
       book:
@@ -22,3 +23,5 @@ ja:
         body: 内容
         user: ユーザ
         created_at: 作成日時
+      comment:
+        body: コメント
