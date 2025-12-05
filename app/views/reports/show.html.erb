@@ -4,6 +4,8 @@
   <%= render @report %>
 </div>
 
+<%= render 'comments/comments_section', commentable: @report %>
+
 <nav class="page-nav">
   <% if @report.user == current_user %>
     <%= link_to t('views.common.edit', name: Report.model_name.human.downcase), edit_report_path(@report) %> |
