@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_24_060432) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_09_000000) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -49,20 +49,30 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_060432) do
   end
 
   create_table "comments", force: :cascade do |t|
+    t.text "body"
     t.integer "user_id", null: false
     t.string "commentable_type", null: false
     t.integer "commentable_id", null: false
-    t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "report_mentions", force: :cascade do |t|
+    t.integer "report_id", null: false
+    t.integer "mentioned_report_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mentioned_report_id"], name: "index_report_mentions_on_mentioned_report_id"
+    t.index ["report_id", "mentioned_report_id"], name: "index_report_mentions_on_report_id_and_mentioned_report_id", unique: true
+    t.index ["report_id"], name: "index_report_mentions_on_report_id"
+  end
+
   create_table "reports", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
     t.integer "user_id", null: false
-    t.string "title", null: false
-    t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_reports_on_user_id"
@@ -87,5 +97,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_060432) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "users"
+  add_foreign_key "report_mentions", "reports"
+  add_foreign_key "report_mentions", "reports", column: "mentioned_report_id"
   add_foreign_key "reports", "users"
 end

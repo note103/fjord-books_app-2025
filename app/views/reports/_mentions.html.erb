@@ -1,0 +1,25 @@
+<section class="report-mentions">
+  <h2>この日報に言及している日報</h2>
+  <% if report.mentioned_reports.any? %>
+    <ul>
+      <% report.mentioned_reports.each do |mentioned_by| %>
+        <li><%= link_to mentioned_by.title, report_path(mentioned_by) %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>言及はありません。</p>
+  <% end %>
+</section>
+
+<section class="report-mentions">
+  <h2>この日報が言及している日報</h2>
+  <% if report.mentioning_reports.any? %>
+    <ul>
+      <% report.mentioning_reports.each do |mentioned| %>
+        <li><%= link_to mentioned.title, report_path(mentioned) %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>言及している日報はありません。</p>
+  <% end %>
+</section>
