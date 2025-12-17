@@ -10,4 +10,8 @@ class User < ApplicationRecord
 
   has_many :reports, dependent: :destroy
   has_many :comments, dependent: :destroy
+
+  def display_name
+    name.presence || email
+  end
 end

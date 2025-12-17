@@ -4,7 +4,7 @@
   </div>
   <div>
     <span>
-      <%= comment.user.name.presence || comment.user.email %>
+      <%= comment.user.display_name %>
     </span>
     <span>
       <%= l(comment.created_at, format: :long) %>

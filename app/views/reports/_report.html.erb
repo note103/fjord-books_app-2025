@@ -11,7 +11,7 @@
 
   <p>
     <strong><%= Report.human_attribute_name(:user) %>:</strong>
-    <%= report.user.name.presence || report.user.email %>
+    <%= report.user.display_name %>
   </p>
 
   <p>
