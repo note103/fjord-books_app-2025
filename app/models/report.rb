@@ -6,4 +6,8 @@ class Report < ApplicationRecord
 
   validates :title, presence: true
   validates :body, presence: true
+
+  def owned_by?(user)
+    self.user == user
+  end
 end
