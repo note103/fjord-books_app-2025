@@ -7,11 +7,8 @@ class Reports::CommentsController < ApplicationController
     @comment = @report.comments.build(comment_params)
     @comment.user = current_user
 
-    if @comment.save
-      redirect_to @report, notice: t('controllers.common.notice_create', name: Comment.model_name.human)
-    else
-      render 'reports/show', status: :unprocessable_entity
-    end
+    @comment.save! # 現在の設計上、保存失敗は想定しておらず、起きた場合は例外で検知したいため save! メソッドを使用
+    redirect_to @report, notice: t('controllers.common.notice_create', name: Comment.model_name.human)
   end
 
   private

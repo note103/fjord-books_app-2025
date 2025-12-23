@@ -7,11 +7,8 @@ class Books::CommentsController < ApplicationController
     @comment = @book.comments.build(comment_params)
     @comment.user = current_user
 
-    if @comment.save
-      redirect_to @book, notice: t('controllers.common.notice_create', name: Comment.model_name.human)
-    else
-      render 'books/show', status: :unprocessable_entity
-    end
+    @comment.save! # 現在の設計上、保存失敗は想定しておらず、起きた場合は例外で検知したいため save! メソッドを使用
+    redirect_to @book, notice: t('controllers.common.notice_create', name: Comment.model_name.human)
   end
 
   private
