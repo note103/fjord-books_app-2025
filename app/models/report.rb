@@ -39,7 +39,7 @@ class Report < ApplicationRecord
 
     transaction do
       saved = save
-      create_mentions if saved
+      create_mentions! if saved
     end
 
     saved
@@ -53,7 +53,7 @@ class Report < ApplicationRecord
 
       if updated
         sending_mentions.destroy_all
-        create_mentions
+        create_mentions!
       end
     end
 
@@ -62,7 +62,7 @@ class Report < ApplicationRecord
 
   private
 
-  def create_mentions
+  def create_mentions!
     extracted_ids = content.to_s.scan(%r{#{MENTION_TARGET_DOMAIN}/reports/(\d+)}).flatten.map(&:to_i).uniq - [id]
     current_report_ids = Report.where(id: extracted_ids).pluck(:id)
 
