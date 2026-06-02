@@ -1,6 +1,6 @@
 <% if report.mentioned_reports.any? %>
   <div>
-    <strong><%= t('activerecord.attributes.mention.mentioned_in', name: Report.model_name.human) %>:</strong>
+    <strong><%= t('activerecord.attributes.mention.mentioned_in', name: Report.model_name.human) %></strong>
     <ul>
       <% report.mentioned_reports.order(updated_at: :desc, id: :asc).each do |mentioned_report| %>
         <li>
