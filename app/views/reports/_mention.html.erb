@@ -1,0 +1,12 @@
+<% if report.mentioned_reports.any? %>
+  <div>
+    <strong><%= t('activerecord.attributes.mention.mentioned_in', name: Report.model_name.human) %>:</strong>
+    <ul>
+      <% report.mentioned_reports.order(updated_at: :desc, id: :asc).each do |mentioned_report| %>
+        <li>
+          <%= link_to mentioned_report.title, report_path(mentioned_report) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
