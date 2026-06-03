@@ -11,17 +11,15 @@ class Report < ApplicationRecord
            foreign_key: 'mentioning_report_id',
            dependent: :destroy,
            inverse_of: :mentioning_report
-  has_many :mentioning_reports,
-           through: :sending_mentions,
-           source: :mentioned_report
+  has_many :mentioned_reports,
+           through: :sending_mentions
   has_many :receiving_mentions,
            class_name: 'ReportMention',
            foreign_key: 'mentioned_report_id',
            dependent: :destroy,
            inverse_of: :mentioned_report
-  has_many :mentioned_reports,
-           through: :receiving_mentions,
-           source: :mentioning_report
+  has_many :mentioning_reports,
+           through: :receiving_mentions
 
   validates :title, presence: true
   validates :content, presence: true
