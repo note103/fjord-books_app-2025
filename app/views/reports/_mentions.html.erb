@@ -2,7 +2,7 @@
   <div>
     <strong><%= t('.mentioned_in', name: Report.model_name.human) %></strong>
     <ul>
-      <% report.mentioned_reports.order(updated_at: :desc, id: :asc).each do |mentioned_report| %>
+      <% report.mentioned_reports.order(updated_at: :desc, id: :desc).each do |mentioned_report| %>
         <li>
           <%= link_to mentioned_report.title, report_path(mentioned_report) %>
         </li>
