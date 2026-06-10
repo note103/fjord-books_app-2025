@@ -43,6 +43,8 @@ class Report < ApplicationRecord
     end
 
     saved
+  rescue ActiveRecord::RecordInvalid
+    false
   end
 
   def update_with_mentions(attributes)
@@ -58,6 +60,8 @@ class Report < ApplicationRecord
     end
 
     updated
+  rescue ActiveRecord::RecordInvalid
+    false
   end
 
   private
