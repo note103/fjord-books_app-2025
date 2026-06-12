@@ -6,7 +6,7 @@
 
   <p>
     <strong><%= Report.human_attribute_name(:content) %>:</strong>
-    <%= format_content report.content %>
+    <%= simple_format(auto_link(html_escape(report.content), link: :urls, sanitize: false)) %>
   </p>
 
   <p>

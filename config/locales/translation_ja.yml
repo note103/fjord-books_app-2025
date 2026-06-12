@@ -23,3 +23,7 @@ ja:
         content: 内容
         user: 作成者
         created_on: 作成日
+
+  reports:
+    mentions:
+      mentioned_in: この%{name}に言及している%{name}
