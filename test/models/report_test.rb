@@ -33,6 +33,17 @@ class ReportTest < ActiveSupport::TestCase
     assert_includes mentioning_report.mentioning_reports, mentioned_report
   end
 
+  test '日報内に他の日報へのリンクが含まれていると言及先からも言及元が参照できる' do
+    mentioning_report = reports(:alice)
+    mentioned_report = reports(:bob)
+
+    mentioning_report.update!(
+      content: "ボブの日報を読みました。http://localhost:3000/reports/#{mentioned_report.id}"
+    )
+
+    assert_includes mentioned_report.mentioned_reports, mentioning_report
+  end
+
   test '日報内で他の日報へのリンクが削除されると言及リストから除外される' do
     mentioning_report = reports(:alice)
     mentioned_report = reports(:bob)
