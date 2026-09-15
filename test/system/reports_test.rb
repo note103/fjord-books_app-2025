@@ -67,7 +67,7 @@ class ReportsTest < ApplicationSystemTestCase
 
     visit report_path(mentioned_report)
     assert_selector 'h1', text: '日報の詳細'
-    assert_text '他の日報へのリンクを記載'
+    assert_link '他の日報へのリンクを記載'
   end
 
   test '他の日報へのリンクを削除すると、言及先の日報から言及元へのリンクが消える' do
