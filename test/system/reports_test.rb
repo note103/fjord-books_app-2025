@@ -49,8 +49,8 @@ class ReportsTest < ApplicationSystemTestCase
     click_on 'この日報を削除', exact: true
 
     assert_text '日報が削除されました。'
-    assert_no_text @report.title
     assert_selector 'h1', text: '日報の一覧'
+    assert_no_link @report.title, href: report_path(@report)
   end
 
   test '他の日報へのリンクを日報に記載すると、言及先の日報に言及元へのリンクが表示される' do
