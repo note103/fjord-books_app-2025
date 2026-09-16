@@ -87,7 +87,6 @@ class ReportsTest < ApplicationSystemTestCase
     click_on 'この日報を編集', exact: true
     assert_selector 'h1', text: '日報の編集'
 
-    fill_in 'タイトル', with: 'みんなの日報を読んだ感想'
     fill_in '内容', with: 'ここでボブの日報を紹介したけど、本人が恥ずかしいって言うのでリンクは削除しておきます。'
     click_on '更新する'
 
@@ -96,7 +95,7 @@ class ReportsTest < ApplicationSystemTestCase
 
     visit report_path(mentioned_report)
     assert_selector 'h1', text: '日報の詳細'
-    assert_no_text mentioning_report.title
+    assert_no_link mentioning_report.title, href: report_path(mentioning_report)
     assert_text '（この日報に言及している日報はまだありません）'
   end
 end
