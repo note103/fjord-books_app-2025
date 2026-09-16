@@ -16,39 +16,40 @@ class ReportsTest < ApplicationSystemTestCase
   test '日報を作成する' do
     visit reports_url
     assert_selector 'h1', text: '日報の一覧'
+    click_on '日報の新規作成'
 
-    click_on '日報の新規作成', exact: true
+    assert_current_path new_report_path
     assert_selector 'h1', text: '日報の新規作成'
 
-    fill_in 'タイトル', with: 'Deviseの練習'
-    fill_in '内容', with: 'Deviseかなり難しかった。'
-    click_on '登録する', exact: true
+    fill_in 'タイトル', with: '日報を書くテスト'
+    fill_in '内容', with: '日報を書くテストの内容です。'
+    click_on '登録する'
 
     assert_text '日報が作成されました。'
-    assert_text 'タイトル: Deviseの練習'
-    assert_text '内容: Deviseかなり難しかった。'
+    assert_text 'タイトル: 日報を書くテスト'
+    assert_text '内容: 日報を書くテストの内容です。'
     assert_text '作成者: Alice'
   end
 
   test '日報を編集する' do
     visit report_path(@report)
     assert_selector 'h1', text: '日報の詳細'
-    click_on 'この日報を編集', exact: true
+    click_on 'この日報を編集'
     assert_selector 'h1', text: '日報の編集'
 
-    fill_in 'タイトル', with: 'Deviseの練習'
-    fill_in '内容', with: 'Devise相当難しかった。'
+    fill_in 'タイトル', with: '日報を編集するテスト'
+    fill_in '内容', with: '日報を編集するテストの内容です。'
     click_on '更新する'
 
     assert_text '日報が更新されました。'
-    assert_text 'タイトル: Deviseの練習'
-    assert_text '内容: Devise相当難しかった。'
+    assert_text 'タイトル: 日報を編集するテスト'
+    assert_text '内容: 日報を編集するテストの内容です。'
   end
 
   test '日報を削除する' do
     visit report_path(@report)
     assert_selector 'h1', text: '日報の詳細'
-    click_on 'この日報を削除', exact: true
+    click_on 'この日報を削除'
 
     assert_text '日報が削除されました。'
     assert_selector 'h1', text: '日報の一覧'
@@ -61,16 +62,16 @@ class ReportsTest < ApplicationSystemTestCase
     visit new_report_path
     assert_selector 'h1', text: '日報の新規作成'
 
-    fill_in 'タイトル', with: 'みんなの日報を読んだ感想'
-    fill_in '内容', with: "ボブの日報はみんな絶対読んだ方がいい。http://localhost:3000/reports/#{mentioned_report.id}"
-    click_on '登録する', exact: true
+    fill_in 'タイトル', with: '他の日報へのリンクを記載するテスト'
+    fill_in '内容', with: "他の日報へのリンクを記載します。http://localhost:3000/reports/#{mentioned_report.id}"
+    click_on '登録する'
 
     assert_text '日報が作成されました。'
-    assert_text "ボブの日報はみんな絶対読んだ方がいい。http://localhost:3000/reports/#{mentioned_report.id}"
+    assert_text "他の日報へのリンクを記載します。http://localhost:3000/reports/#{mentioned_report.id}"
 
     visit report_path(mentioned_report)
     assert_selector 'h1', text: '日報の詳細'
-    assert_link 'みんなの日報を読んだ感想'
+    assert_link '他の日報へのリンクを記載するテスト'
   end
 
   test '他の日報へのリンクを削除すると、言及先の日報から言及元へのリンクが消える' do
@@ -84,14 +85,14 @@ class ReportsTest < ApplicationSystemTestCase
     visit report_path(mentioning_report)
     assert_selector 'h1', text: '日報の詳細'
 
-    click_on 'この日報を編集', exact: true
+    click_on 'この日報を編集'
     assert_selector 'h1', text: '日報の編集'
 
-    fill_in '内容', with: 'ここでボブの日報を紹介したけど、本人が恥ずかしいって言うのでリンクは削除しておきます。'
+    fill_in '内容', with: '他の日報へのリンクを削除します。'
     click_on '更新する'
 
     assert_text '日報が更新されました。'
-    assert_text 'ここでボブの日報を紹介したけど、本人が恥ずかしいって言うのでリンクは削除しておきます。'
+    assert_text '他の日報へのリンクを削除します。'
 
     visit report_path(mentioned_report)
     assert_selector 'h1', text: '日報の詳細'
