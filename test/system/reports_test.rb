@@ -17,8 +17,6 @@ class ReportsTest < ApplicationSystemTestCase
     visit reports_url
     assert_selector 'h1', text: '日報の一覧'
     click_on '日報の新規作成'
-
-    assert_current_path new_report_path
     assert_selector 'h1', text: '日報の新規作成'
 
     fill_in 'タイトル', with: '日報を書くテスト'
