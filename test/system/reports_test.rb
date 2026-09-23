@@ -73,10 +73,10 @@ class ReportsTest < ApplicationSystemTestCase
   end
 
   test '他の日報へのリンクを削除すると、言及先の日報から言及元へのリンクが消える' do
+    mentioning_report = reports(:alice)
     mentioned_report = reports(:bob)
-    @report.update!(content: "http://localhost:3000/reports/#{mentioned_report.id}")
+    mentioning_report.update!(content: "http://localhost:3000/reports/#{mentioned_report.id}")
 
-    mentioning_report = @report
     visit report_path(mentioned_report)
     assert_text mentioning_report.title
 
