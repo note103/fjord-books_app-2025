@@ -51,7 +51,7 @@ class ReportsTest < ApplicationSystemTestCase
 
     assert_text '日報が削除されました。'
     assert_selector 'h1', text: '日報の一覧'
-    assert_no_link @report.title, href: report_path(@report)
+    assert_no_link 'Deviseの練習', href: report_path(@report)
   end
 
   test '他の日報へのリンクを日報に記載すると、言及先の日報に言及元へのリンクが表示される' do
@@ -78,7 +78,7 @@ class ReportsTest < ApplicationSystemTestCase
     mentioning_report.update!(content: "http://localhost:3000/reports/#{mentioned_report.id}")
 
     visit report_path(mentioned_report)
-    assert_text mentioning_report.title
+    assert_text 'Deviseの練習'
 
     visit report_path(mentioning_report)
     assert_selector 'h1', text: '日報の詳細'
@@ -94,7 +94,7 @@ class ReportsTest < ApplicationSystemTestCase
 
     visit report_path(mentioned_report)
     assert_selector 'h1', text: '日報の詳細'
-    assert_no_link mentioning_report.title, href: report_path(mentioning_report)
+    assert_no_link 'Deviseの練習', href: report_path(mentioning_report)
     assert_text '（この日報に言及している日報はまだありません）'
   end
 end
