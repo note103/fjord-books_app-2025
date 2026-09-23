@@ -17,7 +17,7 @@ class ReportTest < ActiveSupport::TestCase
     assert_not alice_report.editable?(bob_user)
   end
 
-  test '投稿日が正しく返される' do
+  test '日報の作成日時から年月日が返される' do
     report = Report.new(created_at: Time.zone.parse('2026-09-01 10:00:00'))
     assert_equal Date.new(2026, 9, 1), report.created_on
   end
