@@ -1,11 +1,9 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+alice:
+  user: alice
+  title: Deviseの練習
+  content: Deviseはかなり難しかった。
 
-one:
-  user: one
-  title: MyString
-  content: MyText
-
-two:
-  user: two
-  title: MyString
-  content: MyText
+bob:
+  user: bob
+  title: アソシエーションの練習
+  content: アソシエーションはかなり難しかった。
